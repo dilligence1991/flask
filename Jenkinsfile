@@ -34,8 +34,8 @@ node {
                  
                  sh ' docker login -u ${dockerUser} -p ${dockerPassword} https://registry.hub.docker.com'
                  echo '${BUILD_NUMBER}'
-                 sh ' docker tag flask-project:"${BUILD_NUMBER}" flask-project:latest '
-                 sh ' docker push flask-project:latest '
+                 sh ' docker tag flask-project:latest flask-project:"${BUILD_NUMBER}"'
+                 sh ' docker push flask-project:"${BUILD_NUMBER}" '
                 }
              }
         }
