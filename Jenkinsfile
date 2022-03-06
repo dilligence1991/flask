@@ -25,7 +25,7 @@ node {
          
         }
         stage('Docker Build') {
-            
+            script{
                 //create and deploy image to docker hub
                 def dockerImgName="flask-project"
                 sh ' docker -v'
@@ -37,7 +37,7 @@ node {
                  sh ' docker tag ${dockerImgName}:${env.BUILD_NUMBER} ${docker_img_name}:latest '
                  sh ' docker push ${dockerImgName}:latest '
                 }
-            
+             }
         }
         stage('Argocd Deploy') {
             
