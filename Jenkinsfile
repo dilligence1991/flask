@@ -27,15 +27,15 @@ node {
         stage('Docker Build') {
             
                 //create and deploy image to docker hub
-                //def docker_img_name="flask-project"
+                def dockerImgName="flask-project"
                 sh ' docker -v'
-                sh ' cd ${WORKSPACE} && docker build -t flask-project . ' 
+                sh ' cd ${WORKSPACE} && docker build -t ${dockerImgName} . ' 
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
                  
-                 sh ' docker login -u ${dockerUser} -p ${dockerPassword} hub.docker.com '
+                 sh ' docker login -u ${dockerUser} -p ${dockerPassword} https://registry.hub.docker.com'
                 
-                 sh ' docker tag ${docker_img_name}:${env.BUILD_NUMBER} ${docker_img_name}:latest '
-                 sh ' docker push ${docker_img_name}:latest '
+                 sh ' docker tag ${dockerImgName}:${env.BUILD_NUMBER} ${docker_img_name}:latest '
+                 sh ' docker push ${dockerImgName}:latest '
                 }
             
         }
