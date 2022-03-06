@@ -29,13 +29,13 @@ node {
                 //create and deploy image to docker hub
                 //def docker_img_name="flask-project"
                 sh ' docker -v'
-                sh ' cd ${WORKSPACE} && /usr/local/bin/docker build -t flask-project . ' 
+                sh ' cd ${WORKSPACE} && docker build -t flask-project . ' 
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
                  
-                 sh ' /usr/local/bin/docker login -u ${dockerUser} -p ${dockerPassword} hub.docker.com '
+                 sh ' docker login -u ${dockerUser} -p ${dockerPassword} hub.docker.com '
                 
-                 sh ' /usr/local/bin/dockertag ${docker_img_name}:${env.BUILD_NUMBER} ${docker_img_name}:latest '
-                 sh ' /usr/local/bin/docker push ${docker_img_name}:latest '
+                 sh ' docker tag ${docker_img_name}:${env.BUILD_NUMBER} ${docker_img_name}:latest '
+                 sh ' docker push ${docker_img_name}:latest '
                 }
             
         }
