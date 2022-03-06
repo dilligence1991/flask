@@ -33,8 +33,8 @@ node {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
                  
                  sh ' docker login -u ${dockerUser} -p ${dockerPassword} https://registry.hub.docker.com'
-                 echo '${env.BUILD_NUMBER}'
-                 sh ' docker tag flask-project:"${env.BUILD_NUMBER}" flask-project:latest '
+                 echo '${BUILD_NUMBER}'
+                 sh ' docker tag flask-project:"${BUILD_NUMBER}" flask-project:latest '
                  sh ' docker push flask-project:latest '
                 }
              }
