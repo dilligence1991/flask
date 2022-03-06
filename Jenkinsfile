@@ -5,6 +5,12 @@ node {
         //def docker_img_name="annaliyx/flask-project"
     }
    //try{
+        stage('init') {
+            script{
+              def dockerPath = tool 'docker' 
+              env.PATH = "${dockerPath}/bin:${env.PATH}" 
+            }
+         }
         stage('Clone') {
            
                 //clone source code
@@ -22,7 +28,7 @@ node {
             
                 //create and deploy image to docker hub
                 //def docker_img_name="flask-project"
-         
+                sh ' docker -v'
                 sh ' cd ${WORKSPACE} && /usr/local/bin/docker build -t flask-project . ' 
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
                  
