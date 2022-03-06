@@ -29,12 +29,12 @@ node {
                 //create and deploy image to docker hub
                 //def dockerImgName="flask-project"
                 sh ' docker -v'
-                sh ' cd ${WORKSPACE} && docker build -t flask-project . ' 
+                sh ' cd ${WORKSPACE} && docker build -t annaliyx/flask-project . ' 
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUser')]) {
                  
                  sh ' docker login -u ${dockerUser} -p ${dockerPassword} https://registry.hub.docker.com'
                  echo '${BUILD_NUMBER}'
-                 sh ' docker tag flask-project:latest flask-project:"${BUILD_NUMBER}"'
+                 sh ' docker tag fannaliyx/flask-project:latest annaliyx/flask-project:"${BUILD_NUMBER}"'
                  sh ' docker push annaliyx/flask-project:"${BUILD_NUMBER}" '
                 }
              }
