@@ -34,7 +34,7 @@ node {
                  
                  sh ' docker login -u ${dockerUser} -p ${dockerPassword} https://registry.hub.docker.com'
                  echo '${BUILD_NUMBER}'
-                 sh ' docker tag fannaliyx/flask-project:latest annaliyx/flask-project:"${BUILD_NUMBER}"'
+                 sh ' docker tag annaliyx/flask-project:latest annaliyx/flask-project:"${BUILD_NUMBER}"'
                  sh ' docker push annaliyx/flask-project:"${BUILD_NUMBER}" '
                 }
              }
